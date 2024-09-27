@@ -106,10 +106,12 @@
 
    
 5. Copy the .R1 and .R2 fastq.gz files to the /reads folder in the current directory
-
+   ```bash
+   mkdir -p ../reads
+   ```
    ![image](https://github.com/user-attachments/assets/ec7ee73c-1765-4920-bc13-55f4ade17b50)
 
-6. Generate the sample_sheet 
+7. Generate the sample_sheet 
    ```bash
    bash create_sample_sheet.sh
    ```
