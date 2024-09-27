@@ -51,67 +51,14 @@
    ```bash
    git clone https://github.com/inrb-labgenpath/singa-illumina.git
    ```
-
-4. Install any of [`Docker`](https://docs.docker.com/engine/installation/), [`Singularity`](https://www.sylabs.io/guides/3.0/user-guide/) (you can follow [this tutorial](https://singularity-tutorial.github.io/01-installation/)), [`Podman`](https://podman.io/), [`Shifter`](https://nersc.gitlab.io/development/shifter/how-to-use/) or [`Charliecloud`](https://hpc.github.io/charliecloud/) for full pipeline reproducibility _(you can use [`Conda`](https://conda.io/miniconda.html) both to install Nextflow itself and also to manage software within pipelines. Please only use it within pipelines as a last resort; see [docs](https://nf-co.re/usage/configuration#basic-configuration-profiles))_.
-
-5. Download the pipeline and test it on a minimal dataset with a single command:
-
+2. create the singa-illumina conda environment
    ```bash
-   nextflow run nf-core/viralrecon -profile test,YOURPROFILE --outdir <OUTDIR>
+   cd singa-illumina && conda env create -f environment.yml
    ```
-*By defaults, the SRAS-CoV-2, MpxV, Poliovirus, Human reads, Ebola and the Phix are provided, you need to make sure the genome are indexed and the path are accurate in the fastqcreen.conf file*
-   Note that some form of configuration will be needed so that Nextflow knows how to fetch the required software. This is usually done in the form of a config profile (`YOURPROFILE` in the example command above). You can chain multiple config profiles in a comma-separated string.
+   N.B: You can use mamba instead of conda (it is quicker)
+   ```conda install -c conda-forge mamba```
 
-   > - The pipeline comes with config profiles called `docker`, `singularity`, `podman`, `shifter`, `charliecloud` and `conda` which instruct the pipeline to use the named tool for software management. For example, `-profile test,docker`.
-   > - Please check [nf-core/configs](https://github.com/nf-core/configs#documentation) to see if a custom config file to run nf-core pipelines already exists for your Institute. If so, you can simply use `-profile <institute>` in your command. This will enable either `docker` or `singularity` and set the appropriate execution settings for your local compute environment.
-   > - If you are using `singularity`, please use the [`nf-core download`](https://nf-co.re/tools/#downloading-pipelines-for-offline-use) command to download images first, before running the pipeline. Setting the [`NXF_SINGULARITY_CACHEDIR` or `singularity.cacheDir`](https://www.nextflow.io/docs/latest/singularity.html?#singularity-docker-hub) Nextflow options enables you to store and re-use the images from a central location for future pipeline runs.
-   > - If you are using `conda`, it is highly recommended to use the [`NXF_CONDA_CACHEDIR` or `conda.cacheDir`](https://www.nextflow.io/docs/latest/conda.html) settings to store the environments in a central location for future pipeline runs.
 
-4. Start running your own analysis!
-
-   > - Please provide pipeline parameters via the CLI or Nextflow `-params-file` option. Custom config files including those provided by the `-c` Nextflow option can be used to provide any configuration except for parameters; see [docs](https://nf-co.re/usage/configuration#custom-configuration-files).
-
-   - Typical command for Illumina shotgun analysis:
-
-     ```bash
-     nextflow run nf-core/viralrecon \
-         --input samplesheet.csv \
-         --outdir <OUTDIR> \
-         --platform illumina \
-         --protocol metagenomic \
-         --genome 'MN908947.3' \
-         -profile <docker/singularity/podman/conda/institute>
-     ```
-
-   - Typical command for Illumina amplicon analysis:
-
-     ```bash
-     nextflow run nf-core/viralrecon \
-         --input samplesheet.csv \
-         --outdir <OUTDIR> \
-         --platform illumina \
-         --protocol amplicon \
-         --genome 'MN908947.3' \
-         --primer_set artic \
-         --primer_set_version 3 \
-         --skip_assembly \
-         -profile <docker/singularity/podman/conda/institute>
-     ```
-
-   - Typical command for Nanopore amplicon analysis:
-
-     ```bash
-     nextflow run nf-core/viralrecon \
-         --input samplesheet.csv \
-         --outdir <OUTDIR> \
-         --platform nanopore \
-         --genome 'MN908947.3' \
-         --primer_set_version 3 \
-         --fastq_dir fastq_pass/ \
-         --fast5_dir fast5_pass/ \
-         --sequencing_summary sequencing_summary.txt \
-         -profile <docker/singularity/podman/conda/institute>
-     ```
 
    - An executable Python script called [`fastq_dir_to_samplesheet.py`](https://github.com/nf-core/viralrecon/blob/master/bin/fastq_dir_to_samplesheet.py) has been provided if you are using `--platform illumina` and would like to auto-create an input samplesheet based on a directory containing FastQ files **before** you run the pipeline (requires Python 3 installed locally) e.g.
 
