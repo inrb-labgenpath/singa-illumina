@@ -107,7 +107,7 @@
    
 5. Copy the .R1 and .R2 fastq.gz files to the /reads folder in the current directory (create the repo once)
    ```bash
-   mkdir -p ../reads
+   mkdir -p ../reads && ls -l
    ```
    ![image](https://github.com/user-attachments/assets/ec7ee73c-1765-4920-bc13-55f4ade17b50)
 
