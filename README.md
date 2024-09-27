@@ -1,16 +1,19 @@
 ## <span style="color: green;">🌿 MpxV-SINGA</span> <span style="color: white;">: </span> <span style="color: blue;">🦠 MonkeyPox Virus - </span> <span style="color: green;">🧬 Sequence </span> <span style="color: yellow;">Information </span> <span style="color: white;">from </span> <span style="color: red;">🧪 Nucleotide </span> <span style="color: brown;">Generation </span> <span style="color: white;">and </span> <span style="color: purple;">🛠️ Assembly</span>
 
+![Maintainer](https://badgen.net/badge/Maintener/Emmanuel%20Lokilo/blue?scale=0.9)
 [![run with conda](http://img.shields.io/badge/run%20with-conda-3EB049?labelColor=000000&logo=anaconda)](https://docs.conda.io/en/latest/)
 [![run with Python](http://img.shields.io/badge/run%20with-Python-3776AB?labelColor=000000&logo=python)](https://www.python.org/)
 [![run with Snakemake](http://img.shields.io/badge/run%20with-Snakemake-4EAA25?labelColor=000000&logo=snakemake)](https://snakemake.readthedocs.io/en/stable/)
 [![Join the Slack Channel](https://img.shields.io/badge/Join%20the%20Slack%20Channel-4A154A?style=flat&logo=slack&logoColor=white)](https://singapipeline.slack.com)
 [![Bash](https://img.shields.io/badge/run%20with-Bash-4EAA25?style=flat&logo=gnu-bash&logoColor=white)](https://www.gnu.org/software/bash/)
 
+
+
 ## Introduction
 
 `SINGA` is a bioinformatics analysis pipeline designed for the assembly and variant calling of Monkeypox Virus (MPXV) samples. This pipeline places an emphasis on quality control, ensuring that low-quality reads are filtered out, primers are effectively trimmed, and human-derived reads are depleted. As a result, users can obtain high-quality MPXV sequences. Tailored specifically for Illumina sequencing data (singa-illumina repository), SINGA is optimized for amplicon-based approaches, focusing on data generated using carefully curated primer sets.
 
-The development of the SINGA pipeline has greatly benefited from collaborative efforts and contributions from various sources within the scientific community. Notably, insights gained from the INRB 2023 workshop (https://github.com/linsalrob/ComputationalGenomicsManual/blob/master/Workshops/INRB2023.md) have provided valuable knowledge and hands-on experience in computational genomics, enriching the pipeline's framework. Additionally, the expertise shared through GeVarLi has further enhanced our understanding of genomic variation analysis. Acknowledgment is also due to the ARTIC Network's ongoing support, particularly through the artic-mpxv-illumina-nf repository, which has offered robust resources and methodologies for analyzing Monkeypox Virus sequences. Together, these contributions have strengthened the development of SINGA, ensuring that it remains a reliable and cutting-edge tool for the genomic analysis of MPXV samples.
+The development of the SINGA pipeline has greatly benefited from collaborative efforts and contributions from various sources within the scientific community. Notably, insights gained from the INRB 2023 workshop `(https://github.com/linsalrob/ComputationalGenomicsManual/blob/master/Workshops/INRB2023.md)` have provided valuable knowledge and hands-on experience in computational genomics, enriching the pipeline's framework. Additionally, the expertise shared through GeVarLi `(https://forge.ird.fr/transvihmi/nfernandez/GeVarLi)` has further enhanced our understanding of genomic variation analysis. Acknowledgment is also due to the ARTIC Network's ongoing support, particularly through the artic-mpxv-illumina-nf repository `(https://github.com/artic-network/artic-mpxv-illumina-nf)` and `(https://github.com/polio-nanopore/piranha)`, which has offered robust resources and methodologies for analyzing Monkeypox Virus sequences. Together, these contributions have strengthened the development of SINGA, ensuring that it remains a reliable and cutting-edge tool for the genomic analysis of MPXV samples.
 
 ## Pipeline summary
 
