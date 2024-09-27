@@ -21,6 +21,8 @@
 
 `SINGA` is designed with flexibility in mind, enabling users to execute specific components of the workflow as needed. For example, users can create an environment.yml file to manage dependencies using Conda, ensuring a reproducible environment for their analyses. The pipeline effectively integrates both Bash and Python scripts, all of which are managed by the Snakemake workflow manager. Furthermore, users have full access to all pipeline files, allowing them to edit and customize the workflow according to their specific requirements.
 
+<div style="height: 5px; background-color: blue;"></div>
+
 [![FastQC](https://badgen.net/badge/icon/FastQC/4CAF50?icon=appveyor&label)](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) : Visualize reads quality before and aftercthe trimming
 
 [![Fastp](https://badgen.net/badge/icon/Fastp/4CAF50?icon=appveyor&label)](https://github.com/OpenGene/fastp) : Remove adapters and low quality reads
