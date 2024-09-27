@@ -53,7 +53,7 @@
    ```
 2. Create the singa-illumina conda environment
    ```bash
-   cd singa-illumina && conda env create -f pipeline/environment.yml
+   cd singa-illumina/pipeline && conda env create -f environment.yml
    ```
    N.B: You can use `mamba` instead of `conda` (it is quicker)
    ```conda install -c conda-forge mamba```
@@ -62,15 +62,23 @@
    ```bash
    conda activate singa-illumina
    ```
-4. Copy the .R1 and .R2 fastq.gz files to the /reads folder in the current directory
+      !!! Do this once (only during the pipeline installation)
+         ```bash
+         mkdir -p ../genomes/Human/
+         cd ../genomes/Human/
+         wget -c https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/405/GCF_000001405.40_GRCh38.p14/GRCh38_major_release_seqs_for_alignment_pipelines/GCA_000001405.15_GRCh38_no_alt_plus_hs38d1_analysis_set.fna.gz
+         bwa index GCA_000001405.15_GRCh38_no_alt_plus_hs38d1_analysis_set.fna.gz
+         cd ../../pipeline
+         ``` 
+5. Copy the .R1 and .R2 fastq.gz files to the /reads folder in the current directory
 
    ![image](https://github.com/user-attachments/assets/ec7ee73c-1765-4920-bc13-55f4ade17b50)
 
-5. Generate the sample_sheet 
+6. Generate the sample_sheet 
    ```bash
-   cd pipeline && bash create_sample_sheet.sh
+   bash create_sample_sheet.sh
    ```
-5. Run the Snakemake file with a suitable number of cores for your host
+5. Run the Snakemake file with a suitable number of cores for your host (use `htop` or `nproc` to check)
    ```bash
    snakemake --cores 10
    ```
