@@ -105,7 +105,7 @@
   `mem` : amount of memory dedicated each specific command
 
    
-5. Copy the .R1 and .R2 fastq.gz files to the /reads folder in the current directory
+5. Copy the .R1 and .R2 fastq.gz files to the /reads folder in the current directory (create the repo once)
    ```bash
    mkdir -p ../reads
    ```
