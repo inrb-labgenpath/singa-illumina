@@ -11,7 +11,7 @@
 ![Windows](https://badgen.net/badge/icon/Bionic%20Beaver%20(18.04)%20%7C%20Focal%20Fossa%20(20.04)%20%7C%20Jammy%20Jellyfish%20(22.04)/00BCF2?icon=windows&label&list=%7C&scale=0.9)
 ![Maintained](https://badgen.net/badge/Maintened/Yes/red?scale=0.9)
 ![Open Source](https://badgen.net/badge/icon/Open%20Source/purple?icon=https://upload.wikimedia.org/wikipedia/commons/4/44/Coraz%C3%B3n.svg&label&scale=0.9)
-![GitHub](https://badgen.net/badge/icon/GitHub/black?icon=https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png&label&scale=0.9)
+![GitHub](https://badgen.net/badge/icon/GitHub/black?icon=https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png&label&scale=0.9) 
 
 ## Introduction
 
