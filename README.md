@@ -1,8 +1,8 @@
 ## <span style="color: green;">🌿 MPXV-SINGA</span> <span style="color: white;">: </span> <span style="color: blue;">🦠 MonkeyPox Virus - </span> <span style="color: green;">🧬 Sequence </span> <span style="color: yellow;">Information </span> <span style="color: white;">from </span> <span style="color: red;">🧪 Nucleotide </span> <span style="color: brown;">Generation </span> <span style="color: white;">and </span> <span style="color: purple;">🛠️ Assembly</span>
 
 [![run with conda](http://img.shields.io/badge/run%20with-conda-3EB049?labelColor=000000&logo=anaconda)](https://docs.conda.io/en/latest/)
-[![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=ffffff)](https://www.python.org/)
-[![Snakemake](https://img.shields.io/badge/Snakemake-4A9D8D?style=for-the-badge&logo=snakemake&logoColor=ffffff)](https://snakemake.readthedocs.io/en/stable/)
+[![run with Python](http://img.shields.io/badge/run%20with-Python-3776AB?labelColor=000000&logo=python)](https://www.python.org/)
+[![run with Snakemake](http://img.shields.io/badge/run%20with-Snakemake-4EAA25?labelColor=000000&logo=snakemake)](https://snakemake.readthedocs.io/en/stable/)
 [![Join the Slack Channel](https://img.shields.io/badge/Join%20the%20Slack%20Channel-4A154A?style=flat&logo=slack&logoColor=white)](https://singapipeline.slack.com)
 [![Bash](https://img.shields.io/badge/run%20with-Bash-4EAA25?style=flat&logo=gnu-bash&logoColor=white)](https://www.gnu.org/software/bash/)
 
