@@ -23,8 +23,8 @@
 
 [![FastQC](https://badgen.net/badge/icon/FastQC/4CAF50?icon=appveyor&label)](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
 
-      - Visualize reads quality before the trimming
-      - Visualize reads quality after the trimming
+- Visualize reads quality before the trimming
+- Visualize reads quality after the trimming
       
 [![Fastp](https://badgen.net/badge/icon/Fastp/4CAF50?icon=appveyor&label)](https://github.com/OpenGene/fastp)
       - *`Remove adapter`*
