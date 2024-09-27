@@ -64,7 +64,6 @@
    ```
    
       !!! Do this once (only during the pipeline installation)
-   
          ```bash
          mkdir -p ../genomes/Human/
          cd ../genomes/Human/
