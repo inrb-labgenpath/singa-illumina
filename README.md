@@ -21,7 +21,7 @@
 
 `SINGA` is designed with flexibility in mind, enabling users to execute specific components of the workflow as needed. For example, users can create an environment.yml file to manage dependencies using Conda, ensuring a reproducible environment for their analyses. The pipeline effectively integrates both Bash and Python scripts, all of which are managed by the Snakemake workflow manager. Furthermore, users have full access to all pipeline files, allowing them to edit and customize the workflow according to their specific requirements.
 
-<div style="height: 5px; background-color: blue;"></div>
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 [![FastQC](https://badgen.net/badge/icon/FastQC/4CAF50?icon=appveyor&label)](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) : Visualize reads quality before and aftercthe trimming
 
@@ -55,14 +55,7 @@ Sort, index and filter alignment
       - Lineage analysis ([`Pangolin`](https://github.com/cov-lineages/pangolin))
       - Clade assignment, mutation calling and sequence quality checks ([`Nextclade`](https://github.com/nextstrain/nextclade))
    9. Create variants long format table collating per-sample information for individual variants ([`BCFTools`](http://samtools.github.io/bcftools/bcftools.html)), functional effect prediction ([`SnpSift`](http://snpeff.sourceforge.net/SnpSift.html)) and lineage analysis ([`Pangolin`](https://github.com/cov-lineages/pangolin))
-6. _De novo_ assembly
-   1. Primer trimming ([`Cutadapt`](https://cutadapt.readthedocs.io/en/stable/guide.html); _amplicon data only_)
-   2. Choice of multiple assembly tools ([`SPAdes`](http://cab.spbu.ru/software/spades/) _||_ [`Unicycler`](https://github.com/rrwick/Unicycler) _||_ [`minia`](https://github.com/GATB/minia))
-      - Blast to reference genome ([`blastn`](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastSearch))
-      - Contiguate assembly ([`ABACAS`](https://www.sanger.ac.uk/science/tools/pagit))
-      - Assembly report ([`PlasmidID`](https://github.com/BU-ISCIII/plasmidID))
-      - Assembly assessment report ([`QUAST`](http://quast.sourceforge.net/quast))
-7. Present QC and visualisation for raw read, alignment, assembly and variant calling results ([`MultiQC`](http://multiqc.info/))
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 ## Quick Start
