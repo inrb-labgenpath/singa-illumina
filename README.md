@@ -115,7 +115,7 @@
    ```
 5. Run the Snakemake file with a suitable number of cores for your host (use `htop` or `nproc` to check)
    ```bash
-   snakemake --cores 10
+   snakemake --cores 10 
    ```
    
 Miscellaneous
