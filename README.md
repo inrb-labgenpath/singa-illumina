@@ -65,13 +65,13 @@
    
       !!! Do this once (only during the pipeline installation)
    
-         ```
+         
          mkdir -p ../genomes/Human/
          cd ../genomes/Human/
          wget -c https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/405/GCF_000001405.40_GRCh38.p14/GRCh38_major_release_seqs_for_alignment_pipelines/GCA_000001405.15_GRCh38_no_alt_plus_hs38d1_analysis_set.fna.gz 
          bwa index GCA_000001405.15_GRCh38_no_alt_plus_hs38d1_analysis_set.fna.gz
          cd ../../pipeline
-         ```
+         
    
 5. Copy the .R1 and .R2 fastq.gz files to the /reads folder in the current directory
 
