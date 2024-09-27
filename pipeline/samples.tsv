@@ -1,0 +1,2 @@
+forward	reverse	sample	sample_library
+/Users/manx/Desktop/github/repository/pipelines/singa/singa-illumina/reads/24MPX-2188C_S15_L001_R1_001.fastq.gz	/Users/manx/Desktop/github/repository/pipelines/singa/singa-illumina/reads/24MPX-2188C_S15_L001_R2_001.fastq.gz	24MPX-2188C	24MPX-2188C_L1
