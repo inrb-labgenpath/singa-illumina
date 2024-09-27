@@ -1,4 +1,4 @@
-# ![nf-core/viralrecon](docs/images/nf-core-viralrecon_logo_light.png#gh-light-mode-only) ![nf-core/viralrecon](docs/images/nf-core-viralrecon_logo_dark.png#gh-dark-mode-only)
+# ![MPXV-SINGA : MonkeyPox Virus - Sequence Information from Nucleotide Generation and Assembly](docs/images/nf-core-viralrecon_logo_light.png#gh-light-mode-only) ![nf-core/viralrecon](docs/images/nf-core-viralrecon_logo_dark.png#gh-dark-mode-only)
 
 [![GitHub Actions CI Status](https://github.com/nf-core/viralrecon/workflows/nf-core%20CI/badge.svg)](https://github.com/nf-core/viralrecon/actions?query=workflow%3A%22nf-core+CI%22)
 [![GitHub Actions Linting Status](https://github.com/nf-core/viralrecon/workflows/nf-core%20linting/badge.svg)](https://github.com/nf-core/viralrecon/actions?query=workflow%3A%22nf-core+linting%22)
