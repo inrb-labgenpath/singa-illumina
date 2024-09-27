@@ -68,7 +68,7 @@
 
 5. Generate the sample_sheet 
    ```bash
-   cd pipipeline && bash create_sample_sheet.sh
+   cd pipeline && bash create_sample_sheet.sh
    ```
 5. Run the Snakemake file with a suitable number of cores for your host
    ```bash
