@@ -66,11 +66,14 @@
 
    ![image](https://github.com/user-attachments/assets/ec7ee73c-1765-4920-bc13-55f4ade17b50)
 
-5. Generate the sample_sheet
+5. Generate the sample_sheet 
    ```bash
-   cd pip
+   cd pipipeline && bash create_sample_sheet.sh
    ```
-
+5. Run the Snakemake file with a suitable number of cores for your host
+   ```bash
+   snakemake --cores 10
+   ```
 
    - An executable Python script called [`fastq_dir_to_samplesheet.py`](https://github.com/nf-core/viralrecon/blob/master/bin/fastq_dir_to_samplesheet.py) has been provided if you are using `--platform illumina` and would like to auto-create an input samplesheet based on a directory containing FastQ files **before** you run the pipeline (requires Python 3 installed locally) e.g.
 
