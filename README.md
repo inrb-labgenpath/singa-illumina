@@ -21,18 +21,11 @@
 
 `SINGA` is designed with flexibility in mind, enabling users to execute specific components of the workflow as needed. For example, users can create an environment.yml file to manage dependencies using Conda, ensuring a reproducible environment for their analyses. The pipeline effectively integrates both Bash and Python scripts, all of which are managed by the Snakemake workflow manager. Furthermore, users have full access to all pipeline files, allowing them to edit and customize the workflow according to their specific requirements.
 
-[![FastQC](https://badgen.net/badge/icon/FastQC/4CAF50?icon=appveyor&label)](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
-- Visualize reads quality before the trimming
-- Visualize reads quality after the trimming
-     
-[![Fastp](https://badgen.net/badge/icon/Fastp/4CAF50?icon=appveyor&label)](https://github.com/OpenGene/fastp)
-- Remove adapter
-- Remove low quality reads
-  
-[![FastQ Screen](https://badgen.net/badge/icon/FastQ%20Screen/3F51B5?icon=appveyor&label)](https://github.com/GenePool/fastq_screen)
+[![FastQC](https://badgen.net/badge/icon/FastQC/4CAF50?icon=appveyor&label)](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) : Visualize reads quality before and aftercthe trimming
 
-- Check for contamination
-*By defaults, the SRAS-CoV-2, MpxV, Poliovirus, Human reads, Ebola and the Phix are provided, you need to make sure the genome are indexed and the path are accurate in the fastqcreen.conf file*
+[![Fastp](https://badgen.net/badge/icon/Fastp/4CAF50?icon=appveyor&label)](https://github.com/OpenGene/fastp) : Remove adapters and low quality reads
+
+[![FastQ Screen](https://badgen.net/badge/icon/FastQ%20Screen/3F51B5?icon=appveyor&label)](https://github.com/GenePool/fastq_screen) : check for contamination
 
 [![MultiQC](https://badgen.net/badge/icon/MultiQC/4CAF50?icon=appveyor&label)](https://github.com/MultiQC/MultiQC)
 
@@ -81,7 +74,7 @@ Sort, index and filter alignment
    ```bash
    nextflow run nf-core/viralrecon -profile test,YOURPROFILE --outdir <OUTDIR>
    ```
-
+*By defaults, the SRAS-CoV-2, MpxV, Poliovirus, Human reads, Ebola and the Phix are provided, you need to make sure the genome are indexed and the path are accurate in the fastqcreen.conf file*
    Note that some form of configuration will be needed so that Nextflow knows how to fetch the required software. This is usually done in the form of a config profile (`YOURPROFILE` in the example command above). You can chain multiple config profiles in a comma-separated string.
 
    > - The pipeline comes with config profiles called `docker`, `singularity`, `podman`, `shifter`, `charliecloud` and `conda` which instruct the pipeline to use the named tool for software management. For example, `-profile test,docker`.
