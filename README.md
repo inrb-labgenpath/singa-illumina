@@ -51,13 +51,23 @@
    ```bash
    git clone https://github.com/inrb-labgenpath/singa-illumina.git
    ```
-2. create the singa-illumina conda environment
+2. Create the singa-illumina conda environment
    ```bash
    cd singa-illumina && conda env create -f environment.yml
    ```
-   N.B: You can use mamba instead of conda (it is quicker)
+   N.B: You can use `mamba` instead of `conda` (it is quicker)
    ```conda install -c conda-forge mamba```
-
+   
+4. Activate the singa-illumina conda environment
+   ```bash
+   conda activate singa-illumina
+   ```
+2. Copy the .R1 and .R2 fastq.gz files to the /reads folder in the current directory
+   .
+   ├── genomes
+   ├── pipeline
+   ├── primers_scheme
+   └── reads <--- copy R1 and R2 here
 
 
    - An executable Python script called [`fastq_dir_to_samplesheet.py`](https://github.com/nf-core/viralrecon/blob/master/bin/fastq_dir_to_samplesheet.py) has been provided if you are using `--platform illumina` and would like to auto-create an input samplesheet based on a directory containing FastQ files **before** you run the pipeline (requires Python 3 installed locally) e.g.
