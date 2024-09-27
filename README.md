@@ -6,6 +6,13 @@
 [![run with Snakemake](http://img.shields.io/badge/run%20with-Snakemake-4EAA25?labelColor=000000&logo=snakemake)](https://snakemake.readthedocs.io/en/stable/)
 [![Join the Slack Channel](https://img.shields.io/badge/Join%20the%20Slack%20Channel-4A154A?style=flat&logo=slack&logoColor=white)](https://singapipeline.slack.com)
 [![Bash](https://img.shields.io/badge/run%20with-Bash-4EAA25?style=flat&logo=gnu-bash&logoColor=white)](https://www.gnu.org/software/bash/)
+![macOS](https://badgen.net/badge/icon/Hight%20Sierra%20(10.13.6)%20%7C%20Catalina%20(10.15.7)%20%7C%20Big%20Sure%20(11.6.3)%20%7C%20Monterey%20(12.6.0)%20%7C%20Ventura%20(13.3.1)%20%7C%20Sonoma(%2014.2.1)/E6055C?icon=apple&label&list=%7C&scale=0.9)
+![Ubuntu](https://badgen.net/badge/icon/Bionic%20Beaver%20(18.04)%20%7C%20Focal%20Fossa%20(20.04)%20%7C%20Jammy%20Jellyfish%20(22.04)/772953?icon=https://www.svgrepo.com/show/25424/ubuntu-logo.svg&label&list=%7C&scale=0.9)
+![Windows](https://badgen.net/badge/icon/Bionic%20Beaver%20(18.04)%20%7C%20Focal%20Fossa%20(20.04)%20%7C%20Jammy%20Jellyfish%20(22.04)/00BCF2?icon=windows&label&list=%7C&scale=0.9)
+![Maintained](https://badgen.net/badge/Maintened/Yes/red?scale=0.9)
+![Open Source](https://badgen.net/badge/icon/Open%20Source/purple?icon=https://upload.wikimedia.org/wikipedia/commons/4/44/Coraz%C3%B3n.svg&label&scale=0.9)
+![GitHub](https://badgen.net/badge/icon/GitHub/black?icon=https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png&label&scale=0.9)
+
 
 
 
