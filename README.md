@@ -27,17 +27,26 @@
 - Visualize reads quality after the trimming
       
 [![Fastp](https://badgen.net/badge/icon/Fastp/4CAF50?icon=appveyor&label)](https://github.com/OpenGene/fastp)
-      - *`Remove adapter`*
-      - *`Remove low quality reads`*
+
+- Remove adapter
+- Remove low quality reads
       
 [![FastQ Screen](https://badgen.net/badge/icon/FastQ%20Screen/3F51B5?icon=appveyor&label)](https://github.com/GenePool/fastq_screen)
-      - *`Check for contamination`*
-`By defaults, the SRAS-CoV-2, MpxV, Poliovirus, Human reads, Ebola and the Phix are provided, you need to make sure the genome are indexed and the path are accurate in the fastqcreen.conf file`
+
+- Check for contamination
+*By defaults, the SRAS-CoV-2, MpxV, Poliovirus, Human reads, Ebola and the Phix are provided, you need to make sure the genome are indexed and the path are accurate in the fastqcreen.conf file*
 
 [![MultiQC](https://badgen.net/badge/icon/MultiQC/4CAF50?icon=appveyor&label)](https://github.com/MultiQC/MultiQC)
-      - *`Assemble of the reports into a html file`*
-      
-4. Removal of host reads ([`Kraken 2`](http://ccb.jhu.edu/software/kraken2/); _optional_)
+
+Assemble of the reports into a html file
+
+[![BWA](https://badgen.net/badge/icon/BWA/3F51B5?icon=appveyor&label)](https://github.com/lh3/bwa)
+
+Read alignment and mapping
+
+[![Samtools](https://badgen.net/badge/icon/Samtools/3F51B5?icon=appveyor&label)](https://github.com/samtools/samtools)
+
+Sort, index and filter alignment
 5. Variant calling
    1. Read alignment ([`Bowtie 2`](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml))
    2. Sort and index alignments ([`SAMtools`](https://sourceforge.net/projects/samtools/files/samtools/))
