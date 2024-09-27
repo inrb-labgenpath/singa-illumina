@@ -88,10 +88,6 @@ Miscellaneous
 The development of the SINGA pipeline has greatly benefited from collaborative efforts and contributions from various sources within the scientific community. Notably, insights gained from the `INRB 2023 workshop` (https://github.com/linsalrob/ComputationalGenomicsManual/blob/master/Workshops/INRB2023.md) have provided valuable knowledge and hands-on experience in computational genomics, enriching the pipeline's framework. Additionally, the expertise shared through `GeVarLi` (https://forge.ird.fr/transvihmi/nfernandez/GeVarLi) has further enhanced our understanding of genomic variation analysis. Acknowledgment is also due to the ARTIC Network's ongoing support, particularly through the `artic-mpxv-illumina-nf` and `piranha` repository (https://github.com/artic-network/artic-mpxv-illumina-nf) and (https://github.com/polio-nanopore/piranha) and other pipelines, which has offered robust resources and methodologies for analyzing Monkeypox Virus sequences. Together, these contributions have strengthened the development of SINGA, ensuring that it remains a reliable and cutting-edge tool for the genomic analysis of MPXV samples.
 
 
-## Contributions and Support
+## Support
 
-The key steps in the Nanopore implementation of the pipeline are carried out using the [ARTIC Network's field bioinformatics pipeline](https://github.com/artic-network/fieldbioinformatics) and were inspired by the amazing work carried out by contributors to the [connor-lab/ncov2019-artic-nf pipeline](https://github.com/connor-lab/ncov2019-artic-nf) originally written by [Matt Bull](https://github.com/m-bull) for use by the [COG-UK](https://github.com/COG-UK) project. Thank you for all of your incredible efforts during this pandemic!
-
-If you would like to contribute to this pipeline, please see the [contributing guidelines](.github/CONTRIBUTING.md).
-
-For further information or help, don't hesitate to get in touch on the [Slack `#viralrecon` channel](https://nfcore.slack.com/channels/viralrecon) (you can join with [this invite](https://nf-co.re/join/slack)).
+The invaluable support of the INRB data team—Gradi Luakanda, Sifa Kavira, and Princesse Paku—along with all the colleagues from the INRB Lab Gen Path, has been essential to the success of this project. Their expertise, dedication, and collaboration have helped overcome various challenges and ensured the project's successful completion. The pipeline improvement is still ongoing.
