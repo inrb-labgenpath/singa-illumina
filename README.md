@@ -39,22 +39,10 @@
 
 [![iVar](https://badgen.net/badge/icon/IVAR/FF5722?icon=github&label)](https://github.com/olavloite/ivar) : Primer trimming
 
+[![FreeBayes](https://badgen.net/badge/icon/FreeBayes/00BFFF?icon=github&label)](https://github.com/freebayes/freebayes): Generate VCF files
 
-5. Variant calling
-   1. Read alignment ([`Bowtie 2`](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml))
-   2. Sort and index alignments ([`SAMtools`](https://sourceforge.net/projects/samtools/files/samtools/))
-   3. Primer sequence removal ([`iVar`](https://github.com/andersen-lab/ivar); _amplicon data only_)
-   4. Duplicate read marking ([`picard`](https://broadinstitute.github.io/picard/); _optional_)
-   5. Alignment-level QC ([`picard`](https://broadinstitute.github.io/picard/), [`SAMtools`](https://sourceforge.net/projects/samtools/files/samtools/))
-   6. Genome-wide and amplicon coverage QC plots ([`mosdepth`](https://github.com/brentp/mosdepth/))
-   7. Choice of multiple variant callers ([`iVar variants`](https://github.com/andersen-lab/ivar); _default for amplicon data_ _||_ [`BCFTools`](http://samtools.github.io/bcftools/bcftools.html); _default for metagenomics data_)
-      - Variant annotation ([`SnpEff`](http://snpeff.sourceforge.net/SnpEff.html), [`SnpSift`](http://snpeff.sourceforge.net/SnpSift.html))
-      - Individual variant screenshots with annotation tracks ([`ASCIIGenome`](https://asciigenome.readthedocs.io/en/latest/))
-   8. Choice of multiple consensus callers ([`BCFTools`](http://samtools.github.io/bcftools/bcftools.html), [`BEDTools`](https://github.com/arq5x/bedtools2/); _default for both amplicon and metagenomics data_ _||_ [`iVar consensus`](https://github.com/andersen-lab/ivar))
-      - Consensus assessment report ([`QUAST`](http://quast.sourceforge.net/quast))
-      - Lineage analysis ([`Pangolin`](https://github.com/cov-lineages/pangolin))
-      - Clade assignment, mutation calling and sequence quality checks ([`Nextclade`](https://github.com/nextstrain/nextclade))
-   9. Create variants long format table collating per-sample information for individual variants ([`BCFTools`](http://samtools.github.io/bcftools/bcftools.html)), functional effect prediction ([`SnpSift`](http://snpeff.sourceforge.net/SnpSift.html)) and lineage analysis ([`Pangolin`](https://github.com/cov-lineages/pangolin))
+[![bcftools](https://badgen.net/badge/icon/bcftools?icon=https://upload.wikimedia.org/wikipedia/commons/2/28/BCFtools_logo.svg&label)](https://samtools.github.io/bcftools/) : Generate consenus file
+
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
