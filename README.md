@@ -15,9 +15,11 @@
 
 ## Introduction
 
-<hr style="border: none; height: 2px; background-color: blue;" />
+<div style="border: 2px solid blue; padding: 10px; border-radius: 5px;">
+    <p style="font-style: italic;">
 `SINGA` is a bioinformatics analysis pipeline designed for the assembly and variant calling of Monkeypox Virus (MPXV) samples. This pipeline places an emphasis on quality control, ensuring that low-quality reads are filtered out, primers are effectively trimmed, and human-derived reads are depleted. As a result, users can obtain high-quality MPXV sequences. Tailored specifically for Illumina sequencing data (singa-illumina repository), SINGA is optimized for amplicon-based approaches, focusing on data generated using carefully curated primer sets.
-<hr style="border: none; height: 2px; background-color: blue;" />
+    </p>
+</div>
 
 ## Pipeline summary
 
