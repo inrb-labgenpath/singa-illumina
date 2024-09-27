@@ -23,7 +23,7 @@
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-[![FastQC](https://badgen.net/badge/icon/FastQC/4CAF50?icon=appveyor&label)](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) : Visualize reads quality before and aftercthe trimming
+[![FastQC](https://badgen.net/badge/icon/FastQC/4CAF50?icon=appveyor&label)](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) : Visualize reads quality before and after the reads trimming
 
 [![Fastp](https://badgen.net/badge/icon/Fastp/4CAF50?icon=appveyor&label)](https://github.com/OpenGene/fastp) : Remove adapters and low quality reads
 
@@ -31,7 +31,7 @@
 
 [![MultiQC](https://badgen.net/badge/icon/MultiQC/4CAF50?icon=appveyor&label)](https://github.com/MultiQC/MultiQC) : Assemble of the reports into a html file
 
-[![BWA](https://badgen.net/badge/icon/BWA/3F51B5?icon=appveyor&label)](https://github.com/lh3/bwa) : Read alignment and mapping
+[![BWA](https://badgen.net/badge/icon/BWA/3F51B5?icon=appveyor&label)](https://github.com/lh3/bwa) : Reads alignment and mapping
 
 [![Samtools](https://badgen.net/badge/icon/Samtools/3F51B5?icon=appveyor&label)](https://github.com/samtools/samtools) : Sort, index and filter alignment
 
