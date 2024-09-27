@@ -1,13 +1,14 @@
-# <span style="color: green;">MPXV-SINGA</span> 
-<span style="color: white;">: </span>
-<span style="color: blue;">MonkeyPox Virus - </span>
-<span style="color: green;">Sequence </span>
-<span style="color: yellow;">Information </span>
-<span style="color: white;">from </span>
-<span style="color: red;">Nucleotide </span>
-<span style="color: brown;">Generation </span>
-<span style="color: white;">and </span>
-<span style="color: purple;">Assembly</span>
+#<span style="color: green; font-style: italic;">MPXV-SINGA</span>
+<span style="color: white; font-style: italic;">: </span>
+<span style="color: blue; font-style: italic;">MonkeyPox Virus - </span>
+<span style="color: green; font-style: italic;">Sequence </span>
+<span style="color: yellow; font-style: italic;">Information </span>
+<span style="color: white; font-style: italic;">from </span>
+<span style="color: red; font-style: italic;">Nucleotide </span>
+<span style="color: brown; font-style: italic;">Generation </span>
+<span style="color: white; font-style: italic;">and </span>
+<span style="color: purple; font-style: italic;">Assembly</span>
+
 
 
 [![GitHub Actions CI Status](https://github.com/nf-core/viralrecon/workflows/nf-core%20CI/badge.svg)](https://github.com/nf-core/viralrecon/actions?query=workflow%3A%22nf-core+CI%22)
