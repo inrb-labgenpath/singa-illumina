@@ -1,4 +1,4 @@
-# ![MPXV-SINGA : MonkeyPox Virus - Sequence Information from Nucleotide Generation and Assembly]
+# <span style="color: green;">MPXV-SINGA <span style="color: white;">: <span style="color: blue;">MonkeyPox Virus - <span style="color: green;">Sequence <span style="color: yellow;">Information <span style="color: white;">from <span style="color: red;">Nucleotide <span style="color: brown;">Generation <span style="color: white;">and <span style="color: purple;">Assembly
 
 [![GitHub Actions CI Status](https://github.com/nf-core/viralrecon/workflows/nf-core%20CI/badge.svg)](https://github.com/nf-core/viralrecon/actions?query=workflow%3A%22nf-core+CI%22)
 [![GitHub Actions Linting Status](https://github.com/nf-core/viralrecon/workflows/nf-core%20linting/badge.svg)](https://github.com/nf-core/viralrecon/actions?query=workflow%3A%22nf-core+linting%22)
