@@ -23,23 +23,23 @@
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-[![FastQC](https://badgen.net/badge/icon/FastQC/4CAF50?icon=appveyor&label)](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) : *Visualize reads quality before and aftercthe trimming*
+[![FastQC](https://badgen.net/badge/icon/FastQC/4CAF50?icon=appveyor&label)](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) : Visualize reads quality before and aftercthe trimming
 
 [![Fastp](https://badgen.net/badge/icon/Fastp/4CAF50?icon=appveyor&label)](https://github.com/OpenGene/fastp) : Remove adapters and low quality reads
 
 [![FastQ Screen](https://badgen.net/badge/icon/FastQ%20Screen/3F51B5?icon=appveyor&label)](https://github.com/GenePool/fastq_screen) : check for contamination
 
-[![MultiQC](https://badgen.net/badge/icon/MultiQC/4CAF50?icon=appveyor&label)](https://github.com/MultiQC/MultiQC)
+[![MultiQC](https://badgen.net/badge/icon/MultiQC/4CAF50?icon=appveyor&label)](https://github.com/MultiQC/MultiQC) : Assemble of the reports into a html file
 
-Assemble of the reports into a html file
+[![BWA](https://badgen.net/badge/icon/BWA/3F51B5?icon=appveyor&label)](https://github.com/lh3/bwa) : Read alignment and mapping
 
-[![BWA](https://badgen.net/badge/icon/BWA/3F51B5?icon=appveyor&label)](https://github.com/lh3/bwa)
+[![Samtools](https://badgen.net/badge/icon/Samtools/3F51B5?icon=appveyor&label)](https://github.com/samtools/samtools) : Sort, index and filter alignment
 
-Read alignment and mapping
+[![Bedtools](https://badgen.net/badge/icon/Bedtools/0072B2?icon=github&label)](https://bedtools.readthedocs.io/en/latest/) : mask genome region
 
-[![Samtools](https://badgen.net/badge/icon/Samtools/3F51B5?icon=appveyor&label)](https://github.com/samtools/samtools)
+[![iVar](https://badgen.net/badge/icon/IVAR/FF5722?icon=github&label)](https://github.com/olavloite/ivar) : Primer trimming
 
-Sort, index and filter alignment
+
 5. Variant calling
    1. Read alignment ([`Bowtie 2`](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml))
    2. Sort and index alignments ([`SAMtools`](https://sourceforge.net/projects/samtools/files/samtools/))
