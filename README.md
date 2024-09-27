@@ -74,7 +74,7 @@
          
 
 
-5. Copy the .R1 and .R2 fastq.gz files to the /reads folder in the current directory
+4. Make sure the give the right path for every folder
 
   <img width="1199" alt="Capture d’écran 2024-09-27 à 18 34 21" src="https://github.com/user-attachments/assets/064cfb8e-c32c-4652-b4e9-efb64bc06f35">
 
