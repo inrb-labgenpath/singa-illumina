@@ -24,14 +24,18 @@
 [![FastQC](https://badgen.net/badge/icon/FastQC/4CAF50?icon=appveyor&label)](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
       - *`Visualize reads quality before the trimming`*
       - *`Visualize reads quality after the trimming`*
+      
 [![Fastp](https://badgen.net/badge/icon/Fastp/4CAF50?icon=appveyor&label)](https://github.com/OpenGene/fastp)
       - *`Remove adapter`*
       - *`Remove low quality reads`*
+      
 [![FastQ Screen](https://badgen.net/badge/icon/FastQ%20Screen/3F51B5?icon=appveyor&label)](https://github.com/GenePool/fastq_screen)
       - *`Check for contamination`*
 `By defaults, the SRAS-CoV-2, MpxV, Poliovirus, Human reads, Ebola and the Phix are provided, you need to make sure the genome are indexed and the path are accurate in the fastqcreen.conf file`
+
 [![MultiQC](https://badgen.net/badge/icon/MultiQC/4CAF50?icon=appveyor&label)](https://github.com/MultiQC/MultiQC)
       - *`Assemble of the reports into a html file`*
+      
 4. Removal of host reads ([`Kraken 2`](http://ccb.jhu.edu/software/kraken2/); _optional_)
 5. Variant calling
    1. Read alignment ([`Bowtie 2`](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml))
