@@ -53,7 +53,7 @@
    ```
 2. Create the singa-illumina conda environment
    ```bash
-   cd singa-illumina && conda env create -f environment.yml
+   cd singa-illumina && conda env create -f pipeline/environment.yml
    ```
    N.B: You can use `mamba` instead of `conda` (it is quicker)
    ```conda install -c conda-forge mamba```
