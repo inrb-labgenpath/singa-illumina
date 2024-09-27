@@ -1,4 +1,14 @@
-# <span style="color: green;">MPXV-SINGA</span> <span style="color: white;">: <span style="color: blue;">MonkeyPox Virus - <span style="color: green;">Sequence <span style="color: yellow;">Information <span style="color: white;">from <span style="color: red;">Nucleotide <span style="color: brown;">Generation <span style="color: white;">and <span style="color: purple;">Assembly
+# <span style="color: green;">MPXV-SINGA</span> 
+<span style="color: white;">: </span>
+<span style="color: blue;">MonkeyPox Virus - </span>
+<span style="color: green;">Sequence </span>
+<span style="color: yellow;">Information </span>
+<span style="color: white;">from </span>
+<span style="color: red;">Nucleotide </span>
+<span style="color: brown;">Generation </span>
+<span style="color: white;">and </span>
+<span style="color: purple;">Assembly</span>
+
 
 [![GitHub Actions CI Status](https://github.com/nf-core/viralrecon/workflows/nf-core%20CI/badge.svg)](https://github.com/nf-core/viralrecon/actions?query=workflow%3A%22nf-core+CI%22)
 [![GitHub Actions Linting Status](https://github.com/nf-core/viralrecon/workflows/nf-core%20linting/badge.svg)](https://github.com/nf-core/viralrecon/actions?query=workflow%3A%22nf-core+linting%22)
