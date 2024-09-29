@@ -62,8 +62,15 @@
    ```bash
    conda activate singa-illumina
    ```
+
+   !!! You may need to increase memory for Java (4 Go for this "-Xm4g"
    
-      !!! Do this once (only during the pipeline installation)
+         
+         export _JAVA_OPTIONS="-Xmx4g" >> ~/.bash_profile or export _JAVA_OPTIONS="-Xmx4g" >> ~/.bashrc
+         source ~/.bash_profile or source ~/.bashrc
+
+   
+   !!! Do this once (only during the pipeline installation)
    
          
          mkdir -p ../genomes/Human/
@@ -74,7 +81,7 @@
          
 
 
-4. Make sure to give the right absolute path for every folder
+5. Make sure to give the right absolute path for every folder
 
   <img width="1199" alt="Capture d’écran 2024-09-27 à 18 34 21" src="https://github.com/user-attachments/assets/064cfb8e-c32c-4652-b4e9-efb64bc06f35">
 
