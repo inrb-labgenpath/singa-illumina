@@ -52,7 +52,6 @@ rule all:
         expand(f"{ref_path}/reference.fasta.{{ext}}", ext=["amb", "ann", "bwt", "pac", "sa"]),
         f"{ref_path}/reference_masked.fasta",
         expand(f"{out_dir}/consensus_sequences/{{sample}}.{{ext}}", sample=df["sample_library"].unique(), ext=["fa"]),
-        expand(f"{out_dir}/consensus_renamed_sequences/{{sample}}.fa", sample=df["sample_library"].unique()),
         expand(f"{out_dir}/variants/{{sample}}.{{ext}}", sample=df["sample_library"].unique(), ext=["gvcf", "mask.txt", "variants.vcf.gz", "consensus.vcf", "bcftools.norm.vcf.gz", "filtered.bcftools.norm.vcf.gz", "bcftools.norm.vcf.gz.csi", "filtered.bcftools.norm.vcf.gz.csi", "variants.vcf.gz.csi"])
 
 rule call_consensus:
