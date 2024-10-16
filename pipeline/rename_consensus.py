@@ -11,7 +11,7 @@ def modify_consensus_files_in_place(input_path):
         raise FileNotFoundError(f"Input directory '{input_path}' does not exist.")
 
     for filename in os.listdir(input_path):
-        if filename.endswith(".fa"):
+        if filename.endswith(".consensus.fasta"):
             input_file = os.path.join(input_path, filename)
 
             # Read the content of the original file
