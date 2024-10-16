@@ -23,6 +23,8 @@ depth_cov = config["depth_cov"]
 gvcf_py = config["gvcf_py"]
 mem = config["mem"]
 renaseq= config["renaseq"]
+nextclade=config["nextclade"]
+allcons=config["allcons"]
 
 # Load sample data
 df = pd.read_table(samples_path, sep="\t")
@@ -35,7 +37,7 @@ Author ----------------- : Emmanuel LOKILO
 Version ---------------- : v.2024.01
 Affiliation ------------ : Pathogen Genomics Laboratory (INRB)
 Date ------------------- : 2024-09-23
-Latest_Modification ---- : 2024-09-29
+Latest_Modification ---- : 2024-10-16
 Use -------------------- : snakemake --cores #
 ######################################################################
 """)
@@ -50,15 +52,29 @@ start_time = time.time()
 
 rule all:
     input:
-        f"{out_dir}/01_Quality_Control/04_multiQC/multiqc_report.html",
+        f"{out_dir}/01_quality_control/04_multiQC/multiqc_report.html",
+        f"{out_dir}/05_nextclade/"
+
+rule nextclade:
+    input:
         expand(f"{out_dir}/04_freebayes/{{sample}}/{{sample}}.consensus.fasta", sample=df["sample_library"].unique())
+    output:
+        f"{out_dir}/05_nextclade/all_consensus.fasta",
+        directory(f"{out_dir}/05_nextclade")
+    params:
+        allcons=allcons, 
+        nextclade=nextclade
+    shell:
+        """
+        python {params.allcons} {input} {output[0]}
+        nextclade run -D {params.nextclade} -O {output[1]} {output[0]} --cds-selection false
+        """
 
 rule call_consensus:
     input:
-        bam=f"{out_dir}/03_Reads_Mapping/04_trimmed_bams/{{sample}}.trimmed.sorted.bam"
+        bam=f"{out_dir}/03_read_mapping/04_trimmed_bams/{{sample}}.trimmed.sorted.bam"
     output:
         consensus=f"{out_dir}/04_freebayes/{{sample}}/{{sample}}.consensus.fasta",
-        folder_cons=directory(f"{out_dir}/04_freebayes/{{sample}}"),
         gvcf=f"{out_dir}/04_freebayes/{{sample}}/{{sample}}.gvcf",
         mask=f"{out_dir}/04_freebayes/{{sample}}/{{sample}}.mask.txt",
         vcf=f"{out_dir}/04_freebayes/{{sample}}/{{sample}}.variants.vcf.gz",
@@ -72,17 +88,18 @@ rule call_consensus:
         depth_cov=depth_cov,
         ref=f"{ref_path}/reference.fasta",
         gvcf_py=gvcf_py,
-        min_allele_freq=0.75,
+        min_allele_freq=0.25,
         renaseq=renaseq
     shell:
         """
         freebayes -p 1 \
             -f {params.ref} \
-            -F 0.2 \
-            -C 1 \
             --pooled-continuous \
             --min-coverage {params.depth_cov} \
-            --gvcf --gvcf-dont-use-chunk true {input.bam} > {output.gvcf}
+            --min-alternate-fraction 0.8 --min-alternate-count 10 --ploidy 1 --pooled-continuous \
+            --use-best-n-alleles 4 --genotype-qualities --no-partial-observations \
+            --min-alternate-qsum 20 --gvcf --gvcf-dont-use-chunk true {input.bam} > {output.gvcf}
+
 
         python {params.gvcf_py} -d {params.depth_cov} -m {output.mask} -v {output.vcf} -c {output.con_vcf} {output.gvcf}
         bcftools index {output.vcf}
@@ -90,19 +107,18 @@ rule call_consensus:
         bcftools index {output.norm_vcf}
         bcftools filter -e 'QUAL < 20 && FMT/DP < {params.depth_cov} && INFO/AF < {params.min_allele_freq}' {output.norm_vcf} -Oz -o {output.fix_norm_vcf}
         bcftools index -f {output.fix_norm_vcf}
-        mkdir -p {output.folder_cons}
         bcftools consensus -f {params.ref} -m {output.mask} -I {output.fix_norm_vcf} > {output.consensus}
-        python {params.renaseq} $(dirname {output.folder_cons})
+        python {params.renaseq} {output.consensus}
         """
 
 rule trim_primers:
     input:
-        expand(f"{out_dir}/03_Reads_Mapping/03_bams/{{sample}}.sorted.bam", sample=df["sample_library"].unique())
+        expand(f"{out_dir}/03_read_mapping/03_bams/{{sample}}.sorted.bam", sample=df["sample_library"].unique())
     output:
-        f"{out_dir}/03_Reads_Mapping/04_trimmed_bams/{{sample}}.trimmed.sorted.bam"
+        f"{out_dir}/03_read_mapping/04_trimmed_bams/{{sample}}.trimmed.sorted.bam"
     params:
         bed=f"{ref_path}/primer.bed",
-        tmp=f"{out_dir}/03_Reads_Mapping/04_trimmed_bams/{{sample}}.trimmed.bam"
+        tmp=f"{out_dir}/03_read_mapping/04_trimmed_bams/{{sample}}.trimmed.bam"
     shell:
         """
         ivar trim -e -i {input[0]} -b {params.bed} -p {params.tmp}
@@ -113,10 +129,10 @@ rule trim_primers:
 
 rule read_mapping:
     input:
-        r1=f"{out_dir}/03_Reads_Mapping/02_not_human/{{sample}}_R1.fastq.gz",
-        r2=f"{out_dir}/03_Reads_Mapping/02_not_human/{{sample}}_R2.fastq.gz",
+        r1=f"{out_dir}/03_read_mapping/02_not_human/{{sample}}_R1.fastq.gz",
+        r2=f"{out_dir}/03_read_mapping/02_not_human/{{sample}}_R2.fastq.gz",
     output:
-        f"{out_dir}/03_Reads_Mapping/03_bams/{{sample}}.sorted.bam"
+        f"{out_dir}/03_read_mapping/03_bams/{{sample}}.sorted.bam"
     params:
         ref=f"{ref_path}/reference_masked.fasta",
         tmp_dir=f"{out_dir}/tmp"
@@ -148,10 +164,10 @@ rule index_reference:
 
 rule not_human:
     input:
-        expand(f"{out_dir}/03_Reads_Mapping/01_human_depleted/{{sample}}.bam", sample=df["sample_library"].unique())
+        expand(f"{out_dir}/03_read_mapping/01_human_depleted/{{sample}}.bam", sample=df["sample_library"].unique())
     output:
-        r1=f"{out_dir}/03_Reads_Mapping/02_not_human/{{sample}}_R1.fastq.gz",
-        r2=f"{out_dir}/03_Reads_Mapping/02_not_human/{{sample}}_R2.fastq.gz"
+        r1=f"{out_dir}/03_read_mapping/02_not_human/{{sample}}_R1.fastq.gz",
+        r2=f"{out_dir}/03_read_mapping/02_not_human/{{sample}}_R2.fastq.gz"
     params:
         threads=threads
     shell:
@@ -162,9 +178,9 @@ rule not_human:
 
 rule human_bam:
     input:
-        expand(f"{out_dir}/02_Read_trimming/01_trimmed_fastq/{{sample}}_R{{readno}}_trimmed.fastq.gz", sample=df["sample_library"].unique(), readno=[1, 2])
+        expand(f"{out_dir}/02_read_trimming/01_trimmed_fastq/{{sample}}_R{{readno}}_trimmed.fastq.gz", sample=df["sample_library"].unique(), readno=[1, 2])
     output:
-        f"{out_dir}/03_Reads_Mapping/01_human_depleted/{{sample}}.bam"
+        f"{out_dir}/03_read_mapping/01_human_depleted/{{sample}}.bam"
     params:
         ref=human_ref,
         cpu=threads
@@ -176,48 +192,48 @@ rule human_bam:
 
 rule multiqc:
     input:
-        expand(f"{out_dir}/01_Quality_Control/01_fastqc_before_trimming/{{sample}}_R{{readno}}_{{file}}", sample=df["sample_library"].unique(), readno=[1, 2], file=["fastqc.html", "fastqc.zip"]),
-        expand(f"{out_dir}/01_Quality_Control/02_fastqc_after_trimming/{{sample}}_R{{readno}}_trimmed_{{file}}", sample=df["sample_library"].unique(), readno=[1, 2], file=["fastqc.html", "fastqc.zip"]),
-        expand(f"{out_dir}/01_Quality_Control/03_fastq_screen/{{sample}}_R{{readno}}_trimmed_{{file}}", sample=df["sample_library"].unique(), readno=[1, 2], file=["screen.html", "screen.txt", "screen.png"]),
-        html=expand(f"{out_dir}/02_Read_trimming/02_fastp/{{sample}}_fastp.html", sample=df["sample_library"].unique()),
-        json=expand(f"{out_dir}/02_Read_trimming/02_fastp/{{sample}}_fastp.json", sample=df["sample_library"].unique())
+        expand(f"{out_dir}/01_quality_control/01_fastqc_before_trimming/{{sample}}_R{{readno}}_{{file}}", sample=df["sample_library"].unique(), readno=[1, 2], file=["fastqc.html", "fastqc.zip"]),
+        expand(f"{out_dir}/01_quality_control/02_fastqc_after_trimming/{{sample}}_R{{readno}}_trimmed_{{file}}", sample=df["sample_library"].unique(), readno=[1, 2], file=["fastqc.html", "fastqc.zip"]),
+        expand(f"{out_dir}/01_quality_control/03_fastq_screen/{{sample}}_R{{readno}}_trimmed_{{file}}", sample=df["sample_library"].unique(), readno=[1, 2], file=["screen.html", "screen.txt", "screen.png"]),
+        html=expand(f"{out_dir}/02_read_trimming/02_fastp/{{sample}}_fastp.html", sample=df["sample_library"].unique()),
+        json=expand(f"{out_dir}/02_read_trimming/02_fastp/{{sample}}_fastp.json", sample=df["sample_library"].unique())
     output:
-        f"{out_dir}/01_Quality_Control/04_multiQC/multiqc_report.html" 
+        f"{out_dir}/01_quality_control/04_multiQC/multiqc_report.html" 
     log:
-        f"{out_dir}/01_Quality_Control/04_multiQC/multiqc.log"
+        f"{out_dir}/01_quality_control/04_multiQC/multiqc.log"
     shell:
-        "multiqc {input} -o {out_dir}/01_Quality_Control/04_multiQC --force > {log} 2>&1"
+        "multiqc {input} -o {out_dir}/01_quality_control/04_multiQC --force > {log} 2>&1"
 
 rule fastq_screen:
     input:
-        expand(f"{out_dir}/02_Read_trimming/01_trimmed_fastq/{{sample}}_R{{readno}}_trimmed.fastq.gz", sample=df["sample_library"].unique(), readno=[1, 2])
+        expand(f"{out_dir}/02_read_trimming/01_trimmed_fastq/{{sample}}_R{{readno}}_trimmed.fastq.gz", sample=df["sample_library"].unique(), readno=[1, 2])
     output:
-        expand(f"{out_dir}/01_Quality_Control/03_fastq_screen/{{sample}}_R{{readno}}_trimmed_{{file}}", sample=df["sample_library"].unique(), readno=[1, 2], file=["screen.html", "screen.txt", "screen.png"])
+        expand(f"{out_dir}/01_quality_control/03_fastq_screen/{{sample}}_R{{readno}}_trimmed_{{file}}", sample=df["sample_library"].unique(), readno=[1, 2], file=["screen.html", "screen.txt", "screen.png"])
     params:
         confile=confile,
         threads=threads
     shell:
-        "fastq_screen --threads {params.threads} --outdir {out_dir}/01_Quality_Control/03_fastq_screen --conf {params.confile} {input} --aligner bwa"
+        "fastq_screen --threads {params.threads} --outdir {out_dir}/01_quality_control/03_fastq_screen --conf {params.confile} {input} --aligner bwa"
 
 rule fastqc_after_trimming:
     input:
-        expand(f"{out_dir}/02_Read_trimming/01_trimmed_fastq/{{sample}}_R{{readno}}_trimmed.fastq.gz", sample=df["sample_library"].unique(), readno=[1, 2])
+        expand(f"{out_dir}/02_read_trimming/01_trimmed_fastq/{{sample}}_R{{readno}}_trimmed.fastq.gz", sample=df["sample_library"].unique(), readno=[1, 2])
     output:
-        expand(f"{out_dir}/01_Quality_Control/02_fastqc_after_trimming/{{sample}}_R{{readno}}_trimmed_{{file}}", sample=df["sample_library"].unique(), readno=[1, 2], file=["fastqc.html", "fastqc.zip"])
+        expand(f"{out_dir}/01_quality_control/02_fastqc_after_trimming/{{sample}}_R{{readno}}_trimmed_{{file}}", sample=df["sample_library"].unique(), readno=[1, 2], file=["fastqc.html", "fastqc.zip"])
     log:
-        expand(f"{out_dir}/01_Quality_Control/02_fastqc_after_trimming/{{sample}}_R{{readno}}_trimmed.log", sample=df["sample_library"].unique(), readno=[1, 2])
+        expand(f"{out_dir}/01_quality_control/02_fastqc_after_trimming/{{sample}}_R{{readno}}_trimmed.log", sample=df["sample_library"].unique(), readno=[1, 2])
     shell:
-        "fastqc -o {out_dir}/01_Quality_Control/02_fastqc_after_trimming {input} --noextract &> {log}"
+        "fastqc -o {out_dir}/01_quality_control/02_fastqc_after_trimming {input} --noextract &> {log}"
 
 rule trim_reads:
     input:
         r1=f"{out_dir}/00_merged_fastq/{{sample}}_R1.fastq.gz",
         r2=f"{out_dir}/00_merged_fastq/{{sample}}_R2.fastq.gz"
     output:
-        trimmed_r1=f"{out_dir}/02_Read_trimming/01_trimmed_fastq/{{sample}}_R1_trimmed.fastq.gz",
-        trimmed_r2=f"{out_dir}/02_Read_trimming/01_trimmed_fastq/{{sample}}_R2_trimmed.fastq.gz",
-        html=f"{out_dir}/02_Read_trimming/02_fastp/{{sample}}_fastp.html",
-        json=f"{out_dir}/02_Read_trimming/02_fastp/{{sample}}_fastp.json"
+        trimmed_r1=f"{out_dir}/02_read_trimming/01_trimmed_fastq/{{sample}}_R1_trimmed.fastq.gz",
+        trimmed_r2=f"{out_dir}/02_read_trimming/01_trimmed_fastq/{{sample}}_R2_trimmed.fastq.gz",
+        html=f"{out_dir}/02_read_trimming/02_fastp/{{sample}}_fastp.html",
+        json=f"{out_dir}/02_read_trimming/02_fastp/{{sample}}_fastp.json"
     params:
         adapters=adapters,
         threads=threads
@@ -232,14 +248,14 @@ rule fastqc_before_trimming:
     input:
         expand(f"{out_dir}/00_merged_fastq/{{sample}}_R{{readno}}.fastq.gz", sample=df["sample_library"].unique(), readno=[1, 2])
     output:
-        expand(f"{out_dir}/01_Quality_Control/01_fastqc_before_trimming/{{sample}}_R{{readno}}_{{file}}", sample=df["sample_library"].unique(), readno=[1, 2], file=["fastqc.html", "fastqc.zip"])
+        expand(f"{out_dir}/01_quality_control/01_fastqc_before_trimming/{{sample}}_R{{readno}}_{{file}}", sample=df["sample_library"].unique(), readno=[1, 2], file=["fastqc.html", "fastqc.zip"])
     log:
-        expand(f"{out_dir}/01_Quality_Control/01_fastqc_before_trimming/{{sample}}_R{{readno}}.log", sample=df["sample_library"].unique(), readno=[1, 2])
+        expand(f"{out_dir}/01_quality_control/01_fastqc_before_trimming/{{sample}}_R{{readno}}.log", sample=df["sample_library"].unique(), readno=[1, 2])
     params:
         mem=mem,
         threads=threads
     shell:
-        "fastqc -o {out_dir}/01_Quality_Control/01_fastqc_before_trimming {input} --noextract &> {log} --threads {params.threads} --memory {params.mem}"
+        "fastqc -o {out_dir}/01_quality_control/01_fastqc_before_trimming {input} --noextract &> {log} --threads {params.threads} --memory {params.mem}"
        
 rule merge_multiple_libraries:
     input:

@@ -3,23 +3,28 @@ import sys
 
 def modify_consensus_files_in_place(input_path):
     """
-    Modify the first line of each .fa file in the input_path to include the filename followed by '>'.
+    Modify the first line of each .consensus.fasta file in the directory 
+    of input_path to include the filename (without extension) followed by '>'.
     This change is done directly in the original file.
     """
-    # Check if input directory exists
-    if not os.path.exists(input_path):
-        raise FileNotFoundError(f"Input directory '{input_path}' does not exist.")
+    # Get the directory from the input path
+    directory = os.path.dirname(input_path)
 
-    for filename in os.listdir(input_path):
+    # Check if the directory exists
+    if not os.path.exists(directory):
+        raise FileNotFoundError(f"Directory '{directory}' does not exist.")
+
+    for filename in os.listdir(directory):
         if filename.endswith(".consensus.fasta"):
-            input_file = os.path.join(input_path, filename)
+            input_file = os.path.join(directory, filename)
 
             # Read the content of the original file
             with open(input_file, "r") as f:
                 lines = f.readlines()
 
-            # Modify the first line to include the filename followed by '>'
-            lines[0] = f">{filename}\n"
+            # Extract the base name without extension and modify the first line
+            base_name = os.path.splitext(filename)[0]
+            lines[0] = f">{base_name}\n"
 
             # Write the modified content back to the same file
             with open(input_file, "w") as f:
@@ -32,4 +37,3 @@ if __name__ == "__main__":
 
     input_path = sys.argv[1]
     modify_consensus_files_in_place(input_path)
-
