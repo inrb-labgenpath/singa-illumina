@@ -126,6 +126,12 @@
    ```bash
    snakemake --cores 10 
    ```
+   ```bash
+   snakemake --cores 10 --rerun-incomplete  # in case you want to resume your analysis
+   ```
+   ```bash
+   snakemake --cores 10 --rerun-incomplete --forceall  # in case you want to restart your analysis
+   ```
    
 Miscellaneous
 
