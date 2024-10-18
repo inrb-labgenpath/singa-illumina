@@ -25,6 +25,7 @@ mem = config["mem"]
 renaseq= config["renaseq"]
 nextclade=config["nextclade"]
 allcons=config["allcons"]
+depth_plot=config["depth_plot"]
 
 # Load sample data
 df = pd.read_table(samples_path, sep="\t")
@@ -37,7 +38,7 @@ Author ----------------- : Emmanuel LOKILO
 Version ---------------- : v.2024.01
 Affiliation ------------ : Pathogen Genomics Laboratory (INRB)
 Date ------------------- : 2024-09-23
-Latest_Modification ---- : 2024-10-16
+Latest_Modification ---- : 2024-10-17
 Use -------------------- : snakemake --cores #
 ######################################################################
 """)
@@ -53,7 +54,23 @@ start_time = time.time()
 rule all:
     input:
         f"{out_dir}/01_quality_control/04_multiQC/multiqc_report.html",
-        f"{out_dir}/05_nextclade/"
+        f"{out_dir}/05_nextclade/",
+        expand(f"{out_dir}/06_depth_plot/tsv/{{sample}}_coverage.tsv", sample=df["sample_library"].unique()),
+        expand(f"{out_dir}/06_depth_plot/plot/{{sample}}_coverage_plot.png", sample=df["sample_library"].unique())
+
+rule R_plot:
+    input:
+        bam=f"{out_dir}/03_read_mapping/04_trimmed_bams/{{sample}}.trimmed.sorted.bam"
+    output:
+        coverage=f"{out_dir}/06_depth_plot/tsv/{{sample}}_coverage.tsv",
+        plot=f"{out_dir}/06_depth_plot/plot/{{sample}}_coverage_plot.png"
+    params:
+        depth_plot=depth_plot  # path to your depth_plot.py script
+    shell:
+        """
+        samtools depth -a {input.bam} > {output.coverage}
+        python {params.depth_plot} {output.coverage} {output.plot}
+        """
 
 rule nextclade:
     input:
