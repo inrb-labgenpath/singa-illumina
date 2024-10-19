@@ -1,0 +1,20 @@
+{
+  "ref_path": "/Users/manx/Desktop/github/repository/pipelines/singa-illumina/primers_scheme/yale-mpox/v1.0.0-cladeI",
+  "mask_reference": "/Users/manx/Desktop/github/repository/pipelines/singa-illumina/pipeline/mpxv_3_LTR.bed",
+  "adapters": "/Users/manx/Desktop/github/repository/pipelines/singa-illumina/pipeline/IlluminaAdapters.fa",
+  "human_ref": "/Users/manx/Desktop/github/repository/pipelines/singa-illumina/genomes/mTDNA_Human/NC_012920.fasta",
+  "nextclade": "/Users/manx/Desktop/github/repository/pipelines/singa-illumina/nextclade",
+  "allcons": "/Users/manx/Desktop/github/repository/pipelines/singa-illumina/pipeline/all_consensus.py",
+  "fastq_dir" : "/Users/manx/Desktop/github/repository/pipelines/singa-illumina/reads",
+  "out_dir": "/Users/manx/Desktop/github/repository/pipelines/singa-illumina/results_20240923",
+  "confile": "/Users/manx/Desktop/github/repository/pipelines/singa-illumina/pipeline/fastq_screen.conf",
+  "gvcf_py": "/Users/manx/Desktop/github/repository/pipelines/singa-illumina/pipeline/process_gvcf.py",
+  "renaseq": "/Users/manx/Desktop/github/repository/pipelines/singa-illumina/pipeline/rename_consensus.py",
+  "depth_plot": "/Users/manx/Desktop/github/repository/pipelines/singa-illumina/pipeline/depth_plot.py",
+  "depth_cov": "10",
+  "samples_path": "/Users/manx/Desktop/github/repository/pipelines/singa-illumina/pipeline/samples.tsv",
+  "library_delimiter": "_",
+  "threads": "12",
+  "mem": "8G"
+}
+
