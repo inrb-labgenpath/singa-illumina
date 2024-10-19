@@ -149,14 +149,17 @@ rule read_mapping:
         r1=f"{out_dir}/02_read_trimming/01_trimmed_fastq/{{sample}}_R1_trimmed.fastq.gz",
         r2=f"{out_dir}/02_read_trimming/01_trimmed_fastq/{{sample}}_R2_trimmed.fastq.gz"
     output:
-        f"{out_dir}/03_read_mapping/01_bams/{{sample}}.sorted.bam"
+        bam=f"{out_dir}/03_read_mapping/01_bams/{{sample}}.sorted.bam",
+        bai=f"{out_dir}/03_read_mapping/01_bams/{{sample}}.sorted.bam.bai"
     params:
         ref=f"{ref_path}/reference.fasta",
         threads=threads
     shell:
         """
-        bwa mem -M -t {threads} {params.ref} {input.r1} {input.r2} | samtools view -bS - | samtools sort -o {output} -
-        samtools index {output} >> {log} 2>&1
+        bwa mem -M -t {params.threads} {params.ref} {input.r1} {input.r2} | \
+        samtools view -bS - | \
+        samtools sort -o {output.bam}
+        samtools index {output.bam}
         """
 
 rule mask_reference:
