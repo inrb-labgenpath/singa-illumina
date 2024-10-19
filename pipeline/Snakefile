@@ -55,6 +55,7 @@ rule all:
     input:
         f"{out_dir}/01_quality_control/04_multiQC/multiqc_report.html",
         f"{out_dir}/05_nextclade/",
+        expand(f"{ref_path}/reference.fasta.{{ext}}", ext=["amb", "ann", "bwt", "pac", "sa"]),
         expand(f"{out_dir}/06_depth_plot/plot/{{sample}}_coverage_plot.png", sample=df["sample_library"].unique())
 
 rule R_plot:
@@ -146,18 +147,16 @@ rule trim_primers:
 rule read_mapping:
     input:
         r1=f"{out_dir}/02_read_trimming/01_trimmed_fastq/{{sample}}_R1_trimmed.fastq.gz",
-        r2=f"{out_dir}/02_read_trimming/01_trimmed_fastq/{{sample}}_R2_trimmed.fastq.gz",
+        r2=f"{out_dir}/02_read_trimming/01_trimmed_fastq/{{sample}}_R2_trimmed.fastq.gz"
     output:
         f"{out_dir}/03_read_mapping/01_bams/{{sample}}.sorted.bam"
     params:
-        ref=f"{ref_path}/reference_masked.fasta",
-        tmp_dir=f"{out_dir}/tmp"
+        ref=f"{ref_path}/reference.fasta",
+        threads=threads
     shell:
         """
-        bwa mem {params.ref} {input[0]} {input[1]} | \
-        samtools view -F 4 -Sb | \
-        samtools sort -o {output}
-        samtools index {output}
+        bwa mem -M -t {threads} {params.ref} {input.r1} {input.r2} | samtools view -bS - | samtools sort -o {output} -
+        samtools index {output} >> {log} 2>&1
         """
 
 rule mask_reference:
@@ -261,5 +260,3 @@ print("""
         Matondo Mingi
         Thank you for using SINGA
         """)
-
-
