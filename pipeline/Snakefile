@@ -56,6 +56,7 @@ rule all:
         f"{out_dir}/01_quality_control/04_multiQC/multiqc_report.html",
         f"{out_dir}/05_nextclade/",
         expand(f"{ref_path}/reference.fasta.{{ext}}", ext=["amb", "ann", "bwt", "pac", "sa"]),
+        expand(f"{ref_path}/reference_masked.fasta.{{ext}}", ext=["amb", "ann", "bwt", "pac", "sa"]),
         expand(f"{out_dir}/06_depth_plot/plot/{{sample}}_coverage_plot.png", sample=df["sample_library"].unique())
 
 rule R_plot:
@@ -105,15 +106,15 @@ rule call_consensus:
         depth_cov=depth_cov,
         ref=f"{ref_path}/reference.fasta",
         gvcf_py=gvcf_py,
-        min_allele_freq=0.25,
+        min_allele_freq=0.5,
         renaseq=renaseq
     shell:
         """
-        freebayes -p 1 \
+        freebayes \
             -f {params.ref} \
             --pooled-continuous \
             --min-coverage {params.depth_cov} \
-            --min-alternate-fraction 0.8 --min-alternate-count 10 --ploidy 1 --pooled-continuous \
+            --min-alternate-fraction 0.5 --min-alternate-count 10 --ploidy 1 --pooled-continuous \
             --use-best-n-alleles 4 --genotype-qualities --no-partial-observations \
             --min-alternate-qsum 20 --gvcf --gvcf-dont-use-chunk true {input.bam} > {output.gvcf}
 
@@ -158,7 +159,7 @@ rule read_mapping:
         """
         bwa mem -M -t {params.threads} {params.ref} {input.r1} {input.r2} | \
         samtools view -bS - | \
-        samtools sort -o {output.bam}
+        samtools sort -o {output.bam} -
         samtools index {output.bam}
         """
 
@@ -166,11 +167,16 @@ rule mask_reference:
     input:
         expand(f"{ref_path}/reference.fasta")
     output:
-        expand(f"{ref_path}/reference_masked.fasta")
+        expand(f"{ref_path}/reference_masked.fasta"),
+        expand(f"{ref_path}/reference_masked.fasta.{{ext}}", ext=["amb", "ann", "bwt", "pac", "sa"])
     params:
     	mask=mask_reference
     shell:
-        "bedtools maskfasta -fi {input} -bed {params.mask} -fo {output} && bwa index {output} && samtools faidx {output}"
+        """
+        bedtools maskfasta -fi {input} -bed {params.mask} -fo {output[0]}
+        bwa index {output[0]}
+        samtools faidx {output[0]}
+        """
 
 rule index_reference:
     input:
