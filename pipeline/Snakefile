@@ -152,7 +152,7 @@ rule read_mapping:
         bam=f"{out_dir}/03_read_mapping/01_bams/{{sample}}.sorted.bam",
         bai=f"{out_dir}/03_read_mapping/01_bams/{{sample}}.sorted.bam.bai"
     params:
-        ref=f"{ref_path}/reference.fasta",
+        ref=f"{ref_path}/reference_masked.fasta",
         threads=threads
     shell:
         """
