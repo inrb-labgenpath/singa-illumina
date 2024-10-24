@@ -112,13 +112,13 @@
    ```
 5. Run the Snakemake file with a suitable number of cores for your host (use `htop` or `nproc` to check)
    ```bash
-   snakemake --cores 10 
+   snakemake --cores all 
    ```
    ```bash
-   snakemake --cores 10 --rerun-incomplete  # in case you want to resume your analysis
+   snakemake --cores all --rerun-incomplete  # in case you want to resume your analysis
    ```
    ```bash
-   snakemake --cores 10 --rerun-incomplete --forceall  # in case you want to restart your analysis
+   snakemake --cores all --rerun-incomplete --forceall  # in case you want to restart your analysis
    ```
    
 Miscellaneous
