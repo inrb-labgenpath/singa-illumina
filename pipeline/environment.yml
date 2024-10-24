@@ -1,4 +1,4 @@
-name: singa-illumina
+name: singa-illumina_v.2024.10.1
 channels:
   - bioconda
   - conda-forge
