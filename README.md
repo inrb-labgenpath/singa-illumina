@@ -60,14 +60,19 @@
    
 3. Activate the singa-illumina conda environment
    ```bash
-   conda activate singa-illumina
+   conda activate singa-illumina_v.2024.10.1
    ```
 
    !!! You may need to increase memory for Java (4 Go for this "-Xm4g"
    
          
-         export _JAVA_OPTIONS="-Xmx4g" >> ~/.bash_profile or export _JAVA_OPTIONS="-Xmx4g" >> ~/.bashrc
-         source ~/.bash_profile or source ~/.bashrc
+         export _JAVA_OPTIONS="-Xmx4g" >> ~/.bash_profile
+                           or
+         export _JAVA_OPTIONS="-Xmx4g" >> ~/.bashrc
+                           then
+         source ~/.bash_profile && conda activate singa-illumina_v.2024.10.1
+                  or
+         source ~/.bashrc && conda activate singa-illumina_v.2024.10.1
 
 5. Make sure to give the right absolute path for every folder
 
