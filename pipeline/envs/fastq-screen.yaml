@@ -1,0 +1,7 @@
+channels:
+  - bioconda
+  - conda-forge
+dependencies:
+  - perl-gd=2.76 
+  - perl-gdgraph=1.54
+  - fastq-screen
