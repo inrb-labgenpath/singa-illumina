@@ -67,6 +67,8 @@ rule R_plot:
         plot=f"{out_dir}/06_depth_plot/plot/{{sample}}_coverage_plot.png"
     params:
         depth_plot=depth_plot  # path to your depth_plot.py script
+    conda:
+        "envs/depth_plot.yaml"
     shell:
         """
         samtools depth -a {input.bam} > {output.coverage}
@@ -82,6 +84,8 @@ rule nextclade:
     params:
         allcons=allcons, 
         nextclade=nextclade
+    conda:
+        "envs/nextclade.yaml"
     shell:
         """
         python {params.allcons} {input} {output[0]}
@@ -90,7 +94,8 @@ rule nextclade:
 
 rule call_consensus:
     input:
-        bam=f"{out_dir}/03_read_mapping/02_trimmed_bams/{{sample}}.trimmed.sorted.bam"
+        bam=f"{out_dir}/03_read_mapping/02_trimmed_bams/{{sample}}.trimmed.sorted.bam",
+        ref=f"{ref_path}/reference.fasta"
     output:
         consensus=f"{out_dir}/04_freebayes/{{sample}}/{{sample}}.consensus.fasta",
         gvcf=f"{out_dir}/04_freebayes/{{sample}}/{{sample}}.gvcf",
@@ -104,14 +109,15 @@ rule call_consensus:
         fix_norm_vcf_index=f"{out_dir}/04_freebayes/{{sample}}/{{sample}}.filtered.bcftools.norm.vcf.gz.csi"
     params:
         depth_cov=depth_cov,
-        ref=f"{ref_path}/reference.fasta",
         gvcf_py=gvcf_py,
         min_allele_freq=0.5,
         renaseq=renaseq
+    conda:
+        "envs/call_consensus.yaml"
     shell:
         """
         freebayes \
-            -f {params.ref} \
+            -f {input.ref} \
             --pooled-continuous \
             --min-coverage {params.depth_cov} \
             --min-alternate-fraction 0.5 --min-alternate-count 10 --ploidy 1 --pooled-continuous \
@@ -121,11 +127,11 @@ rule call_consensus:
 
         python {params.gvcf_py} -d {params.depth_cov} -m {output.mask} -v {output.vcf} -c {output.con_vcf} {output.gvcf}
         bcftools index {output.vcf}
-        bcftools norm -f {params.ref} {output.vcf} -Oz -o {output.norm_vcf}
+        bcftools norm -f {input.ref} {output.vcf} -Oz -o {output.norm_vcf}
         bcftools index {output.norm_vcf}
         bcftools filter -e 'QUAL < 20 && FMT/DP < {params.depth_cov} && INFO/AF < {params.min_allele_freq}' {output.norm_vcf} -Oz -o {output.fix_norm_vcf}
         bcftools index -f {output.fix_norm_vcf}
-        bcftools consensus -f {params.ref} -m {output.mask} -I {output.fix_norm_vcf} > {output.consensus}
+        bcftools consensus -f {input.ref} -m {output.mask} -I {output.fix_norm_vcf} > {output.consensus}
         python {params.renaseq} {output.consensus}
         """
 
@@ -137,6 +143,8 @@ rule trim_primers:
     params:
         bed=f"{ref_path}/primer.bed",
         tmp=f"{out_dir}/03_read_mapping/02_trimmed_bams/{{sample}}.trimmed.bam"
+    conda:
+        "envs/trim_primers.yaml"
     shell:
         """
         ivar trim -e -i {input[0]} -b {params.bed} -p {params.tmp}
@@ -148,16 +156,18 @@ rule trim_primers:
 rule read_mapping:
     input:
         r1=f"{out_dir}/02_read_trimming/01_trimmed_fastq/{{sample}}_R1_trimmed.fastq.gz",
-        r2=f"{out_dir}/02_read_trimming/01_trimmed_fastq/{{sample}}_R2_trimmed.fastq.gz"
+        r2=f"{out_dir}/02_read_trimming/01_trimmed_fastq/{{sample}}_R2_trimmed.fastq.gz",
+        ref=f"{ref_path}/reference_masked.fasta"
     output:
         bam=f"{out_dir}/03_read_mapping/01_bams/{{sample}}.sorted.bam",
         bai=f"{out_dir}/03_read_mapping/01_bams/{{sample}}.sorted.bam.bai"
     params:
-        ref=f"{ref_path}/reference_masked.fasta",
         threads=threads
+    conda:
+        "envs/read_mapping.yaml"
     shell:
         """
-        bwa mem -M -t {params.threads} {params.ref} {input.r1} {input.r2} | \
+        bwa mem -M -t {params.threads} {input.ref} {input.r1} {input.r2} | \
         samtools view -bS - | \
         samtools sort -o {output.bam} -
         samtools index {output.bam}
@@ -170,7 +180,9 @@ rule mask_reference:
         expand(f"{ref_path}/reference_masked.fasta"),
         expand(f"{ref_path}/reference_masked.fasta.{{ext}}", ext=["amb", "ann", "bwt", "pac", "sa"])
     params:
-    	mask=mask_reference
+        mask=mask_reference
+    conda:
+        "envs/mask_reference.yaml"
     shell:
         """
         bedtools maskfasta -fi {input} -bed {params.mask} -fo {output[0]}
@@ -183,6 +195,8 @@ rule index_reference:
         expand(f"{ref_path}/reference.fasta")
     output:
         expand(f"{ref_path}/reference.fasta.{{ext}}", ext=["amb", "ann", "bwt", "pac", "sa"])
+    conda:
+        "envs/index_reference.yaml"
     shell:
         "bwa index {input}"
 
@@ -195,6 +209,8 @@ rule multiqc:
         json=expand(f"{out_dir}/02_read_trimming/02_fastp/{{sample}}_fastp.json", sample=df["sample_library"].unique())
     output:
         f"{out_dir}/01_quality_control/04_multiQC/multiqc_report.html" 
+    conda:
+        "envs/multiqc.yaml"
     log:
         f"{out_dir}/01_quality_control/04_multiQC/multiqc.log"
     shell:
@@ -208,6 +224,8 @@ rule fastq_screen:
     params:
         confile=confile,
         threads=threads
+    conda:
+        "envs/fastq-screen.yaml"
     shell:
         "fastq_screen --threads {params.threads} --outdir {out_dir}/01_quality_control/03_fastq_screen --conf {params.confile} {input} --aligner bwa"
 
@@ -216,6 +234,8 @@ rule fastqc_after_trimming:
         expand(f"{out_dir}/02_read_trimming/01_trimmed_fastq/{{sample}}_R{{readno}}_trimmed.fastq.gz", sample=df["sample_library"].unique(), readno=[1, 2])
     output:
         expand(f"{out_dir}/01_quality_control/02_fastqc_after_trimming/{{sample}}_R{{readno}}_trimmed_{{file}}", sample=df["sample_library"].unique(), readno=[1, 2], file=["fastqc.html", "fastqc.zip"])
+    conda:
+       "envs/fastqc.yaml"
     log:
         expand(f"{out_dir}/01_quality_control/02_fastqc_after_trimming/{{sample}}_R{{readno}}_trimmed.log", sample=df["sample_library"].unique(), readno=[1, 2])
     shell:
@@ -233,6 +253,8 @@ rule trim_reads:
     params:
         adapters=adapters,
         threads=threads
+    conda:
+        "envs/fastp.yaml"
     shell:
         """
         fastp -i {input.r1} -I {input.r2} -o {output.trimmed_r1} -O {output.trimmed_r2} \
@@ -250,6 +272,8 @@ rule fastqc_before_trimming:
     params:
         mem=mem,
         threads=threads
+    conda:
+        "envs/fastqc.yaml"
     shell:
         "fastqc -o {out_dir}/01_quality_control/01_fastqc_before_trimming {input} --noextract &> {log} --threads {params.threads} --memory {params.mem}"
        
