@@ -55,8 +55,8 @@ rule all:
     input:
         f"{out_dir}/01_quality_control/04_multiQC/multiqc_report.html",
         f"{out_dir}/05_nextclade/",
-        expand(f"{ref_path}/reference.fasta.{{ext}}", ext=["amb", "ann", "bwt", "pac", "sa"]),
-        expand(f"{ref_path}/reference_masked.fasta.{{ext}}", ext=["amb", "ann", "bwt", "pac", "sa"]),
+        expand(f"{ref_path}/reference.fasta.{{ext}}", ext=["amb", "ann", "bwt", "pac", "sa","fai"]),
+        expand(f"{ref_path}/reference_masked.fasta.{{ext}}", ext=["amb", "ann", "bwt", "pac", "sa","fai"]),
         expand(f"{out_dir}/06_depth_plot/plot/{{sample}}_coverage_plot.png", sample=df["sample_library"].unique())
 
 rule R_plot:
@@ -168,7 +168,7 @@ rule mask_reference:
         expand(f"{ref_path}/reference.fasta")
     output:
         expand(f"{ref_path}/reference_masked.fasta"),
-        expand(f"{ref_path}/reference_masked.fasta.{{ext}}", ext=["amb", "ann", "bwt", "pac", "sa"])
+        expand(f"{ref_path}/reference_masked.fasta.{{ext}}", ext=["amb", "ann", "bwt", "pac", "sa","fai"])
     params:
     	mask=mask_reference
     shell:
@@ -184,7 +184,10 @@ rule index_reference:
     output:
         expand(f"{ref_path}/reference.fasta.{{ext}}", ext=["amb", "ann", "bwt", "pac", "sa"])
     shell:
-        "bwa index {input}"
+        """
+        bwa index {input}
+        samtools faidx {input}
+        """
 
 rule multiqc:
     input:
