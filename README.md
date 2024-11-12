@@ -109,8 +109,6 @@ Miscellaneous
    - Make sure about the primer-scheme you want to use. SINGA propose a list of pipeline similar to ones from artic. (By default, yale-mpox/v1.0.0-cladeI is selected)
      
      <img width="169" alt="Capture d’écran 2024-09-27 à 16 31 59" src="https://github.com/user-attachments/assets/53556ab7-369c-4849-ba76-f11ee93a04d8">
-     
-   - You can customize fastqscreen, make sure the reference is indexed and the path is exact in the pipeline/fastq_screen.conf file
 
 ## Documentation
 
