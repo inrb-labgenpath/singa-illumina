@@ -79,26 +79,29 @@
 mv path_file.sh ../.. && cd ../.. && bash path_file.sh && cd - && python update_json.py
 ```
 
+5. Update the path in the fastq_screen.conf
+
    
-5. Copy the .R1 and .R2 fastq.gz files to the /reads folder in the current directory (create the repo once)
+6. Copy the .R1 and .R2 fastq.gz files to the /reads folder in the current directory (create the repo once)
    ```bash
    mkdir -p ../reads && ls -l ../
    ```
-   ![image](https://github.com/user-attachments/assets/ec7ee73c-1765-4920-bc13-55f4ade17b50)
 
 7. Generate the sample_sheet  
    ```bash
    bash create_sample_sheet.sh
    ```
-5. Run the Snakemake file with a suitable number of cores for your host (use `htop` or `nproc` to check)
+8. Run the Snakemake file with a suitable number of cores for your host (use `htop` or `nproc` to check)
    ```bash
    snakemake --cores all 
    ```
+   In case you want to resume your analysis
    ```bash
-   snakemake --cores all --rerun-incomplete  # in case you want to resume your analysis
+   snakemake --cores all --rerun-incomplete
    ```
+   In case you want to restart your analysis
    ```bash
-   snakemake --cores all --rerun-incomplete --forceall  # in case you want to restart your analysis
+   snakemake --cores all --rerun-incomplete --forceall
    ```
    
 Miscellaneous
