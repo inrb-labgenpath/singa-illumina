@@ -111,22 +111,18 @@ Miscellaneous
      <img width="169" alt="Capture d’écran 2024-09-27 à 16 31 59" src="https://github.com/user-attachments/assets/53556ab7-369c-4849-ba76-f11ee93a04d8">
 
    - Open the fastq_screen and update the path of the BWA (or another aligner you may use) tool and each genome_reference in the genome folder:
-  11   │ #BOWTIE /usr/local/bin/bowtie/bowtie
-  12   │ #BOWTIE2 /usr/local/bowtie2/bowtie2
-  13   │ BWA /Users/manx/miniforge3/envs/singa-illumina_v.2024.10.1/bin/bwa
-  14   │ #MINIMAP2 /usr/local/minimap2/minimap2
 
-  60   │ DATABASE    mTDNA_Human /Users/manx/Desktop/github/repository/pipelines/singa-illumina/genomes/mTDNA_Human/NC_012920.fasta
-  61   │ ##
-  64   │ DATABASE    Mpxv    /Users/manx/Desktop/github/repository/pipelines/singa-illumina/genomes/Mpxv/NC_003310.1.fasta
-  65   │ ##
-  67   │ DATABASE    Ebola   /Users/manx/Desktop/github/repository/pipelines/singa-illumina/genomes/Ebola/AF086833.2.fasta
-  68   │ ##
-  70   │ DATABASE    PhiX    /Users/manx/Desktop/github/repository/pipelines/singa-illumina/genomes/Phix/NC_001422.1.fasta 
-  71   │ ##
-  73   │ DATABASE    Polio   /Users/manx/Desktop/github/repository/pipelines/singa-illumina/genomes/Polio/polio.wg.fasta
-  74   │ ##
-  77   │ DATABASE    Sars-CoV-2      /Users/manx/Desktop/github/repository/pipelines/singa-illumina/genomes/Sars-CoV-2/MN908947.3.fasta 
+         #BOWTIE /usr/local/bin/bowtie/bowtie
+         #BOWTIE2 /usr/local/bowtie2/bowtie2
+         BWA /Users/manx/miniforge3/envs/singa-illumina_v.2024.10.1/bin/bwa
+         #MINIMAP2 /usr/local/minimap2/minimap2
+
+         DATABASE    mTDNA_Human /Users/manx/Desktop/github/repository/pipelines/singa-illumina/genomes/mTDNA_Human/NC_012920.fasta
+         DATABASE    Mpxv    /Users/manx/Desktop/github/repository/pipelines/singa-illumina/genomes/Mpxv/NC_003310.1.fasta
+         DATABASE    Ebola   /Users/manx/Desktop/github/repository/pipelines/singa-illumina/genomes/Ebola/AF086833.2.fasta
+         DATABASE    PhiX    /Users/manx/Desktop/github/repository/pipelines/singa-illumina/genomes/Phix/NC_001422.1.fasta 
+         DATABASE    Polio   /Users/manx/Desktop/github/repository/pipelines/singa-illumina/genomes/Polio/polio.wg.fasta
+         DATABASE    Sars-CoV-2      /Users/manx/Desktop/github/repository/pipelines/singa-illumina/genomes/Sars-CoV-2/MN908947.3.fasta 
 
 ## Documentation
 
