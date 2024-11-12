@@ -110,6 +110,24 @@ Miscellaneous
      
      <img width="169" alt="Capture d’écran 2024-09-27 à 16 31 59" src="https://github.com/user-attachments/assets/53556ab7-369c-4849-ba76-f11ee93a04d8">
 
+   - Open the fastq_screen and update the path of the BWA (or another aligner you may use) tool and each genome_reference in the genome folder:
+  11   │ #BOWTIE /usr/local/bin/bowtie/bowtie
+  12   │ #BOWTIE2 /usr/local/bowtie2/bowtie2
+  13   │ BWA /Users/manx/miniforge3/envs/singa-illumina_v.2024.10.1/bin/bwa
+  14   │ #MINIMAP2 /usr/local/minimap2/minimap2
+
+  60   │ DATABASE    mTDNA_Human /Users/manx/Desktop/github/repository/pipelines/singa-illumina/genomes/mTDNA_Human/NC_012920.fasta
+  61   │ ##
+  64   │ DATABASE    Mpxv    /Users/manx/Desktop/github/repository/pipelines/singa-illumina/genomes/Mpxv/NC_003310.1.fasta
+  65   │ ##
+  67   │ DATABASE    Ebola   /Users/manx/Desktop/github/repository/pipelines/singa-illumina/genomes/Ebola/AF086833.2.fasta
+  68   │ ##
+  70   │ DATABASE    PhiX    /Users/manx/Desktop/github/repository/pipelines/singa-illumina/genomes/Phix/NC_001422.1.fasta 
+  71   │ ##
+  73   │ DATABASE    Polio   /Users/manx/Desktop/github/repository/pipelines/singa-illumina/genomes/Polio/polio.wg.fasta
+  74   │ ##
+  77   │ DATABASE    Sars-CoV-2      /Users/manx/Desktop/github/repository/pipelines/singa-illumina/genomes/Sars-CoV-2/MN908947.3.fasta 
+
 ## Documentation
 
 The development of the SINGA pipeline has greatly benefited from collaborative efforts and contributions from various sources within the scientific community. Notably, insights gained from the `INRB 2023 workshop` (https://github.com/linsalrob/ComputationalGenomicsManual/blob/master/Workshops/INRB2023.md) have provided valuable knowledge and hands-on experience in computational genomics, enriching the pipeline's framework. Additionally, the expertise shared through `GeVarLi` (https://forge.ird.fr/transvihmi/nfernandez/GeVarLi) has further enhanced our understanding of genomic variation analysis. Acknowledgment is also due to the ARTIC Network's ongoing support, particularly through the `artic-mpxv-illumina-nf` and `piranha` repository (https://github.com/artic-network/artic-mpxv-illumina-nf) and (https://github.com/polio-nanopore/piranha) and other pipelines, which has offered robust resources and methodologies for analyzing Monkeypox Virus sequences. Together, these contributions have strengthened the development of SINGA, ensuring that it remains a reliable and cutting-edge tool for the genomic analysis of MPXV samples.
