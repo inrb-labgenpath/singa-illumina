@@ -52,6 +52,7 @@
    git clone https://github.com/inrb-labgenpath/singa-illumina.git
    ```
 2. Create the singa-illumina conda environment
+
    For macOS:
    ```bash
    cd singa-illumina/pipeline && conda env create -f environment.yml
