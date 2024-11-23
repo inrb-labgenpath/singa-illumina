@@ -101,6 +101,10 @@ mv path_file.sh ../.. && cd ../.. && bash path_file.sh && cd - && python update_
    ```bash
    snakemake --cores all 
    ```
+   In case you want to keep running snakemake even if a job fails
+   ```bash
+   snakemake --cores all --keep-going
+   ```
    In case you want to resume your analysis
    ```bash
    snakemake --cores all --rerun-incomplete
