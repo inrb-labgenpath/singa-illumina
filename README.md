@@ -52,13 +52,19 @@
    git clone https://github.com/inrb-labgenpath/singa-illumina.git
    ```
 2. Create the singa-illumina conda environment
+
+   For macOS:
    ```bash
    cd singa-illumina/pipeline && conda env create -f environment.yml
+   ```
+   For Linux:
+   ```bash
+   cd singa-illumina/pipeline && conda env create -f environment.yaml
    ```
    N.B: You can use `mamba` instead of `conda` (it is quicker)
    ```conda install -c conda-forge mamba```
    
-3. Activate the singa-illumina conda environment
+4. Activate the singa-illumina conda environment
    ```bash
    conda activate singa-illumina_v.2024.10.1
    ```
@@ -74,7 +80,7 @@
                   or
          source ~/.bashrc && conda activate singa-illumina_v.2024.10.1
 
-4. Update the path in the config.json
+5. Update the path in the config.json
 ```bash
 mv path_file.sh ../.. && cd ../.. && bash path_file.sh && cd - && python update_json.py
 ```
