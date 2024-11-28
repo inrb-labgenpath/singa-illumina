@@ -106,7 +106,7 @@ rule call_consensus:
         depth_cov=depth_cov,
         ref=f"{ref_path}/reference.fasta",
         gvcf_py=gvcf_py,
-        min_allele_freq=0.5,
+        min_allele_freq=0.05,
         renaseq=renaseq
     shell:
         """
@@ -114,7 +114,7 @@ rule call_consensus:
             -f {params.ref} \
             --pooled-continuous \
             --min-coverage {params.depth_cov} \
-            --min-alternate-fraction 0.5 --min-alternate-count 10 --ploidy 1 --pooled-continuous \
+            --min-alternate-fraction 0.05 --min-alternate-count 10 --ploidy 1 --pooled-continuous \
             --use-best-n-alleles 4 --genotype-qualities --no-partial-observations \
             --min-alternate-qsum 20 --gvcf --gvcf-dont-use-chunk true {input.bam} > {output.gvcf}
 
@@ -123,7 +123,7 @@ rule call_consensus:
         bcftools index {output.vcf}
         bcftools norm -f {params.ref} {output.vcf} -Oz -o {output.norm_vcf}
         bcftools index {output.norm_vcf}
-        bcftools filter -e 'QUAL < 20 && FMT/DP < {params.depth_cov} && INFO/AF < {params.min_allele_freq}' {output.norm_vcf} -Oz -o {output.fix_norm_vcf}
+        bcftools filter -e 'QUAL < 30 && FMT/DP < {params.depth_cov} && INFO/VAF < {params.min_allele_freq}' {output.norm_vcf} -Oz -o {output.fix_norm_vcf}
         bcftools index -f {output.fix_norm_vcf}
         bcftools consensus -f {params.ref} -m {output.mask} -I {output.fix_norm_vcf} > {output.consensus}
         python {params.renaseq} {output.consensus}
@@ -182,7 +182,7 @@ rule index_reference:
     input:
         expand(f"{ref_path}/reference.fasta")
     output:
-        expand(f"{ref_path}/reference.fasta.{{ext}}", ext=["amb", "ann", "bwt", "pac", "sa"])
+        expand(f"{ref_path}/reference.fasta.{{ext}}", ext=["amb", "ann", "bwt", "pac", "sa","fai"])
     shell:
         """
         bwa index {input}
